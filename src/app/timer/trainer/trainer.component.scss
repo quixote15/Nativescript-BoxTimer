@@ -1,0 +1,11 @@
+/* Add mobile styles for the component here.  */
+.container {
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-action {
+  margin: 20 0;
+  flex-direction: row ;
+  justify-content: space-between;
+}

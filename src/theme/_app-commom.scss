@@ -1,2 +1,29 @@
 // Import the theme’s main ruleset - both index and platform specific.
-@import '~nativescript-theme-core/scss/index'
+@import "~nativescript-theme-core/scss/index";
+
+label,
+button,
+.h1 {
+  font-family: "Roboto", "Roboto-Regular";
+  color: white;
+}
+
+.fa {
+  font-family: "FontAwesome", "Font-Awesome";
+}
+
+.fa.large {
+  font-size: 150;
+}
+
+.header-container {
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 22;
+  align-items: center;
+}
+
+.h1 {
+  font-size: 30;
+  line-height: 35;
+}
