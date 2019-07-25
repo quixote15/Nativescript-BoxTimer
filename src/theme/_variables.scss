@@ -1,1 +1,9 @@
 @import "~nativescript-theme-core/scss/light";
+
+
+// Colors
+$primary: #5253E3;//$primary: lighten(#000, 13%);
+$background: $primary;
+$secondary: #FF7C9C;
+$disabled: lighten(#000, 62%);
+$accent: $sky;
