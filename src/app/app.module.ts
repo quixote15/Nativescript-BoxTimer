@@ -4,6 +4,8 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { TimerModule } from "./timer/timer.module";
+import { ToMinutePipe } from './pipes/to-minute.pipe';
+import { PipesModule } from "./pipes/pipes.modules";
 
 @NgModule({
     bootstrap: [
@@ -12,6 +14,7 @@ import { TimerModule } from "./timer/timer.module";
     imports: [
         NativeScriptModule,
         TimerModule,
+        PipesModule,
         AppRoutingModule
     ],
     declarations: [

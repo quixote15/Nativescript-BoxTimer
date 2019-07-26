@@ -2,10 +2,15 @@
   <Label class="action-bar-title" text="Timer"></Label>
 </ActionBar>
 
-<GridLayout rows="100,*" columns="*" class="page">
+<GridLayout
+  rows="100,*"
+  columns="*"
+  class="page"
+  [ngClass]="{ 'timer-active': isTraining }"
+>
   <!-- Add your page content here -->
   <FlexboxLayout row="0" col="0" class="header-container">
-    <Label text="&#xf177;" class="fa"></Label>
+    <Button *ngIf="isTraining" (tap)="onBack()" text="&#xf177;" class="fa"></Button>
 
     <FlexboxLayout width="85%" flexDirection="row" justifyContent="center">
       <Label text="Treino" class="h1 text-center"></Label>
@@ -14,26 +19,35 @@
 
   <FlexboxLayout row="1" col="0" class="container">
     <FlexboxLayout>
-      <Button fontSize="150" text="&#xf01d;" class="fa large"></Button>
+      <Button
+        *ngIf="!isTraining"
+        (tap)="startTraining()"
+        fontSize="150"
+        text="&#xf01d;"
+        class="fa large"
+      ></Button>
+      <Button
+        *ngIf="isTraining"
+        (tap)="startTraining()"
+        text="&#xf28c;"
+        class="fa large"
+      ></Button>
     </FlexboxLayout>
 
-    <FlexboxLayout class="timer-action">
-      <Label fontSize="30" text="&#xf0d9;" class="fa"></Label>
-      <Label marginLeft="10" marginRight="10" fontSize="60" text="3"></Label>
-      <Label fontSize="30" text="&#xf0da;" class="fa"></Label>
-    </FlexboxLayout>
-    <FlexboxLayout class="timer-action">
-      <Label fontSize="30" text="&#xf0d9;" class="fa"></Label>
-      <Label marginLeft="10" marginRight="10" fontSize="60" text="3:00"></Label>
-      <Label fontSize="30" text="&#xf0da;" class="fa"></Label>
-    </FlexboxLayout>
-    <FlexboxLayout class="timer-action">
-      <Label fontSize="30" text="&#xf0d9;" class="fa"></Label>
-      <Label marginLeft="10" marginRight="10" fontSize="60" text="1:00"></Label>
-      <Label fontSize="30" text="&#xf0da;" class="fa"></Label>
-    </FlexboxLayout>
+    <ns-timer-action [counter]="currentTraining.rounds"></ns-timer-action>
+
+    <ns-timer-action
+      [isCountingTime]="false"
+      [counter]="currentTraining.duration"
+    ></ns-timer-action>
+
+    <ns-timer-action
+      [isCountingTime]="false"
+      [counter]="currentTraining.interval"
+    ></ns-timer-action>
+
     <!-- <FlexboxLayout >
-        <Button text="&#xf28c;" class="fa"></Button>
+
       </FlexboxLayout>
       botao stop
     -->

@@ -1,0 +1,23 @@
+<FlexboxLayout class="timer-action">
+  <Button
+    (tap)="onSubtract()"
+    fontSize="30"
+    text="&#xf0d9;"
+    class="fa"
+  ></Button>
+  <Label
+    *ngIf="!isCountingTime"
+    marginLeft="10"
+    marginRight="10"
+    fontSize="60"
+    [text]="counter | toMinute"
+  ></Label>
+  <Label
+    *ngIf="isCountingTime"
+    marginLeft="10"
+    marginRight="10"
+    fontSize="60"
+    [text]="counter"
+  ></Label>
+  <Button (tap)="onAdd()" fontSize="30" text="&#xf0da;" class="fa"></Button>
+</FlexboxLayout>

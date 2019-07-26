@@ -1,5 +1,6 @@
 // Import the theme’s main ruleset - both index and platform specific.
 @import "~nativescript-theme-core/scss/index";
+@import "variables";
 
 label,
 button,
@@ -26,4 +27,8 @@ button,
 .h1 {
   font-size: 30;
   line-height: 35;
+}
+
+.timer-active {
+  background-color: $secondary;
 }
