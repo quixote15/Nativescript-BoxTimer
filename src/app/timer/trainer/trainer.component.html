@@ -2,49 +2,40 @@
   <Label class="action-bar-title" text="Timer"></Label>
 </ActionBar>
 
-<GridLayout
-  rows="100,*"
-  columns="*"
-  class="page"
-  [ngClass]="{ 'timer-active': isTraining }"
->
+<GridLayout rows="100,*" columns="*" class="page" class="timer">
   <!-- Add your page content here -->
   <FlexboxLayout row="0" col="0" class="header-container">
-    <Button *ngIf="isTraining" (tap)="onBack()" text="&#xf177;" class="fa"></Button>
+    <Button
+      *ngIf="isTraining"
+      (tap)="onBack()"
+      text="&#xf177;"
+      class="fa"
+    ></Button>
 
     <FlexboxLayout width="85%" flexDirection="row" justifyContent="center">
-      <Label text="Treino" class="h1 text-center"></Label>
+      <Label [text]="headerTitle" class="h1 text-center "></Label>
     </FlexboxLayout>
   </FlexboxLayout>
 
   <FlexboxLayout row="1" col="0" class="container">
     <FlexboxLayout>
+      <!-- play -->
       <Button
-        *ngIf="!isTraining"
         (tap)="startTraining()"
         fontSize="150"
         text="&#xf01d;"
         class="fa large"
       ></Button>
-      <Button
-        *ngIf="isTraining"
-        (tap)="startTraining()"
-        text="&#xf28c;"
-        class="fa large"
-      ></Button>
     </FlexboxLayout>
 
-    <ns-timer-action [counter]="currentTraining.rounds"></ns-timer-action>
-
     <ns-timer-action
       [isCountingTime]="false"
-      [counter]="currentTraining.duration"
+      [(counter)]="currentTraining.rounds"
     ></ns-timer-action>
+    
+    <ns-timer-action [(counter)]="currentTraining.duration"></ns-timer-action>
 
-    <ns-timer-action
-      [isCountingTime]="false"
-      [counter]="currentTraining.interval"
-    ></ns-timer-action>
+    <ns-timer-action [(counter)]="currentTraining.interval"></ns-timer-action>
 
     <!-- <FlexboxLayout >
 

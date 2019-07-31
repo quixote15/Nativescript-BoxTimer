@@ -5,35 +5,39 @@ import { TrainerService } from "~/app/services/trainer.service";
 import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
-    selector: "ns-trainer",
-    templateUrl: "./trainer.component.html",
-    styleUrls: ["./trainer.component.scss"]
+    selector: "ns-training-on",
+    templateUrl: "./training-on.component.html",
+    styleUrls: ["./training-on.component.scss"]
 })
-export class TrainerComponent implements OnInit {
-    currentTraining: Training = new Training();
+export class TrainingOnComponent implements OnInit {
+    currentTraining: Training;
     isTraining: boolean = false;
 
     constructor(
         private page: Page,
-        private trainer: TrainerService,
+        public trainer: TrainerService,
         private router: RouterExtensions
     ) {}
 
     ngOnInit() {
         this.page.actionBarHidden = true;
-        this.trainer.setTrainingModel(this.currentTraining);
+        this.trainer.startTraining();
     }
 
     startTraining() {
-        this.trainer.setIsTraining(true);
-        this.trainer.setTrainingModel(this.currentTraining);
-        //this.trainer.startTraining();
-        this.router.navigate(["/trainingOn"]);
+        this.isTraining = true;
+        this.trainer.setIsTraining(this.isTraining);
+        this.trainer.startTraining();
     }
 
     finishTraining() {
         this.trainer.finishTraining();
         this.isTraining = false;
+        this.router.backToPreviousPage();
+    }
+
+    pauseTraining() {
+        this.trainer.togglePauseTraining();
     }
 
     onBack() {

@@ -1,0 +1,39 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Timer"></Label>
+</ActionBar>
+
+<GridLayout rows="100,*,200" columns="*" class="page" class="timer-active">
+  <!-- Add your page content here -->
+  <FlexboxLayout row="0" col="0" class="header-container">
+    <FlexboxLayout width="95%" flexDirection="column" justifyContent="center">
+      <Label [text]="headerTitle" class="h1 text-center border"></Label>
+    </FlexboxLayout>
+  </FlexboxLayout>
+
+  <FlexboxLayout
+    row="1"
+    col="0"
+    class="container"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <ns-clock [interval]="currentInterval"></ns-clock>
+  </FlexboxLayout>
+
+  <FlexboxLayout class="player-buttons" row="2" col="0">
+    <!-- pause -->
+    <Button (tap)="finishTraining()" text="&#xf28d;" class="fa medium"></Button>
+    <Button
+      *ngIf="!trainer.isPaused"
+      (tap)="pauseTraining()"
+      text="&#xf28c;"
+      class="fa medium"
+    ></Button>
+    <Button
+      *ngIf="trainer.isPaused"
+      (tap)="pauseTraining()"
+      text="&#xf01d;"
+      class="fa medium"
+    ></Button>
+  </FlexboxLayout>
+</GridLayout>

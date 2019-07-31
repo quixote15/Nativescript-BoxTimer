@@ -8,23 +8,27 @@ import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 export class TimerActionComponent implements OnInit {
     @Input() counter: number = 60;
     @Input() isCountingTime = true;
-    @Output() onAddChange = new EventEmitter();
-    @Output() onSubtractChange = new EventEmitter();
+    @Input() hasActionButtons = true;
+    @Output() counterChange = new EventEmitter();
     constructor() {}
 
     ngOnInit() {}
 
     onAdd() {
-        console.log("time: ", !this.isCountingTime);
-        const increment: number = this.isCountingTime ? Number(1) : Number(10);
+        const increment: number = this.isCountingTime ? 10 : 1;
 
         this.counter = this.counter + Number(increment);
+        this.counterChange.emit(this.counter);
     }
 
     onSubtract() {
-        if (!this.isCountingTime) {
-            this.counter = this.counter - 1;
-            this.counter = this.counter >= 0 ? this.counter : 0;
-        }
+        const increment: number = this.isCountingTime ? 10 : 1;
+        this.counter = this.counter - increment;
+        this.counter = this.counter >= 0 ? this.counter : 0;
+        this.counterChange.emit(this.counter);
+    }
+
+    onChange(){
+        this.counterChange.emit(this.counter);
     }
 }

@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { TimerModule } from "./timer/timer.module";
 import { ToMinutePipe } from './pipes/to-minute.pipe';
 import { PipesModule } from "./pipes/pipes.modules";
+import { TrainerService } from "./services/trainer.service";
 
 @NgModule({
     bootstrap: [
@@ -20,6 +21,7 @@ import { PipesModule } from "./pipes/pipes.modules";
     declarations: [
         AppComponent
     ],
+    providers: [TrainerService],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
