@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, ViewContainerRef, OnDestroy } from "@angular/core";
 import { Page } from "tns-core-modules/ui/page/page";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import * as application from "tns-core-modules/application";
+import { Subscription } from "rxjs";
 import {
     AndroidApplication,
     AndroidActivityBackPressedEventData
@@ -19,9 +20,10 @@ import { ModalComponent } from "~/app/shared/ui/modal/modal.component";
     templateUrl: "./training-on.component.html",
     styleUrls: ["./training-on.component.scss"]
 })
-export class TrainingOnComponent implements OnInit {
+export class TrainingOnComponent implements OnInit, OnDestroy {
     currentTraining: Training;
     isTraining: boolean = false;
+    private subscription: Subscription;
 
     constructor(
         private page: Page,
@@ -36,19 +38,17 @@ export class TrainingOnComponent implements OnInit {
             application.android.on(
                 AndroidApplication.activityBackPressedEvent,
                 (data: AndroidActivityBackPressedEventData) => {
-                    console.log("chamou back button");
-                    data.cancel = true; // prevents default back button behavior
+                    data.cancel = true;
+                    // prevents default back button behavior
+                    this.forceTrainingStop();
                 }
             );
         }
 
         this.page.actionBarHidden = true;
         this.trainer.startTraining();
-        this.trainer.getStatus().subscribe(status => {
-            if (status === Status.WILL_FORCE_STOP) {
-            }
-            if (status === Status.DONE) {
-            }
+        this.subscription = this.trainer.getStatus().subscribe(async (status) => {
+
             switch (status) {
                 case Status.WILL_FORCE_STOP:
                     /*return this.modalDialog
@@ -65,24 +65,29 @@ export class TrainingOnComponent implements OnInit {
                                 this.trainer.togglePauseTraining(); //resume
                             }
                         });*/
-                    return dialogs
+                     const endTraining = await dialogs
                         .confirm({
                             title: "Tem certeza que vai terminar o treino?",
                             okButtonText: "Sim",
                             cancelButtonText: "Não"
-                        })
-                        .then(endTraining => {
-                            // result argument is boolean
-                            if (endTraining) {
-                                this.trainer.finishTraining();
-                            } else {
-                                this.trainer.togglePauseTraining(); //resume
-                            }
                         });
+                        console.log('resultado da modal: ' + endTraining)
+                        // result argument is boolean
+                        if (endTraining) {
+                            this.trainer.finishTraining();
+                        } else {
+                            this.trainer.togglePauseTraining(); //resume
+                        }
+
+                        break;
                 case Status.DONE:
                     return this.router.backToPreviousPage();
             }
         });
+    }
+
+    ngOnDestroy(){
+        this.subscription.unsubscribe();
     }
 
     startTraining() {

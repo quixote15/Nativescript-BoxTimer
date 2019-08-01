@@ -82,7 +82,7 @@ export class TrainerService {
             }
 
             this.pausedValue = currentTimeCounter;
-        }, 100);
+        }, 1000);
 
         this.clockIntervalId = setCurrentInterval;
     }

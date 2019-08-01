@@ -18,7 +18,7 @@ export class TrainerComponent implements OnInit {
         private trainer: TrainerService,
         private router: RouterExtensions
     ) {
-        console.log('chamour');
+       // console.log('chamour');
     }
 
     ngOnInit() {
