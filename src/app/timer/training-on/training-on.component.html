@@ -6,7 +6,7 @@
   <!-- Add your page content here -->
   <FlexboxLayout row="0" col="0" class="header-container">
     <FlexboxLayout width="95%" flexDirection="column" justifyContent="center">
-      <Label [text]="headerTitle" class="h1 text-center border"></Label>
+      <Label [text]="headerTitle" class="h1 text-center border text-white"></Label>
     </FlexboxLayout>
   </FlexboxLayout>
 
@@ -22,18 +22,18 @@
 
   <FlexboxLayout class="player-buttons" row="2" col="0">
     <!-- pause -->
-    <Button (tap)="forceTrainingStop()" text="&#xf28d;" class="fa medium btn-icon"></Button>
+    <Button (tap)="forceTrainingStop()" text="&#xf28d;" class="fa medium btn-icon text-white"></Button>
     <Button
       *ngIf="!trainer.isPaused"
       (tap)="pauseTraining()"
       text="&#xf28c;"
-      class="fa medium btn-icon"
+      class="fa medium btn-icon text-white"
     ></Button>
     <Button
       *ngIf="trainer.isPaused"
       (tap)="pauseTraining()"
       text="&#xf01d;"
-      class="fa medium btn-icon"
+      class="fa medium btn-icon text-white"
     ></Button>
   </FlexboxLayout>
 </GridLayout>

@@ -4,13 +4,14 @@
     (tap)="onSubtract()"
     fontSize="30"
     text="&#xf0d9;"
-    class="fa btn-icon"
+    class="fa btn-icon text-white"
   ></Button>
   <Label
     *ngIf="isCountingTime"
     marginLeft="10"
     marginRight="10"
     fontSize="60"
+    class="text-white"
     [text]="counter | toMinute"
   ></Label>
   <Label
@@ -18,6 +19,7 @@
     marginLeft="10"
     marginRight="10"
     fontSize="60"
+    class="text-white"
     [text]="counter"
   ></Label>
   <Button
@@ -25,6 +27,6 @@
     (tap)="onAdd()"
     fontSize="30"
     text="&#xf0da;"
-    class="fa btn-icon"
+    class="fa btn-icon text-white"
   ></Button>
 </FlexboxLayout>
