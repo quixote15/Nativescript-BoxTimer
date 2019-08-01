@@ -12,6 +12,7 @@ export class TrainerService {
     pausedValue: number = null;
     isPaused: boolean = false;
     status = new Subject<Status>();
+    soundStatus = new Subject<Status>();
 
     constructor() {}
 
@@ -19,9 +20,13 @@ export class TrainerService {
         return this.status.asObservable();
     }
 
+    getSoundStatus(): Observable<Status> {
+        return this.soundStatus.asObservable();
+    }
+
     setStatus(status: Status) {
-        if(status === Status.WILL_FORCE_STOP){
-            if(!this.currentTraining.isPaused){
+        if (status === Status.WILL_FORCE_STOP) {
+            if (!this.currentTraining.isPaused) {
                 this.togglePauseTraining(); //pause training
             }
         }
@@ -61,6 +66,13 @@ export class TrainerService {
                 this.currentTraining.currentRound === rounds
             ) {
                 return this.finishTraining();
+            }
+
+            if (currentTimeCounter === 11 && !this.currentTraining.isPaused) {
+                this.soundStatus.next(Status.IS_COUNTINGDOWN);
+            }
+            if (currentTimeCounter === 1 && !this.currentTraining.isPaused) {
+                this.soundStatus.next(Status.GO);
             }
 
             if (currentTimeCounter === 0) {

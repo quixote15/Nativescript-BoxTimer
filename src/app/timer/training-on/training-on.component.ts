@@ -8,12 +8,14 @@ import {
     AndroidActivityBackPressedEventData
 } from "tns-core-modules/application";
 import { isAndroid } from "tns-core-modules/platform";
+import { TNSPlayer } from "nativescript-audio-player";
 
 import { Training, Status } from "~/app/models";
 import { TrainerService } from "~/app/services/trainer.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ModalDialogService } from "nativescript-angular/modal-dialog";
 import { ModalComponent } from "~/app/shared/ui/modal/modal.component";
+import { PlayerService } from "~/app/services/player.service";
 
 @Component({
     selector: "ns-training-on",
@@ -24,13 +26,13 @@ export class TrainingOnComponent implements OnInit, OnDestroy {
     currentTraining: Training;
     isTraining: boolean = false;
     private subscription: Subscription;
+    private subscriptionSound: Subscription;
 
     constructor(
         private page: Page,
         public trainer: TrainerService,
         private router: RouterExtensions,
-        private modalDialog: ModalDialogService,
-        private vcRef: ViewContainerRef
+        private player: PlayerService
     ) {}
 
     ngOnInit() {
@@ -47,47 +49,49 @@ export class TrainingOnComponent implements OnInit, OnDestroy {
 
         this.page.actionBarHidden = true;
         this.trainer.startTraining();
-        this.subscription = this.trainer.getStatus().subscribe(async (status) => {
-
+        this.subscriptionSound = this.trainer
+            .getSoundStatus()
+            .subscribe(status => {
+                switch (status) {
+                    case Status.GO:
+                        return this.player.playStatusTrack(Status.GO);
+                    case Status.IS_COUNTINGDOWN:
+                        return this.player.playStatusTrack(
+                            Status.IS_COUNTINGDOWN
+                        );
+                }
+            });
+        this.subscription = this.trainer.getStatus().subscribe(async status => {
             switch (status) {
+                case Status.PAUSED:
+                    return this.player.togglePlay();
+                case Status.TRAINING:
+                    return this.player.togglePlay();
                 case Status.WILL_FORCE_STOP:
-                    /*return this.modalDialog
-                        .showModal(ModalComponent, {
-                            fullscreen: false,
-                            viewContainerRef: this.vcRef,
-                            context: {}
-                        })
-                        .then((action: string) => {
-                            console.log(action);
-                            if (action === "yes") {
-                                this.trainer.finishTraining();
-                            } else {
-                                this.trainer.togglePauseTraining(); //resume
-                            }
-                        });*/
-                     const endTraining = await dialogs
-                        .confirm({
-                            title: "Tem certeza que vai terminar o treino?",
-                            okButtonText: "Sim",
-                            cancelButtonText: "Não"
-                        });
-                        console.log('resultado da modal: ' + endTraining)
-                        // result argument is boolean
-                        if (endTraining) {
-                            this.trainer.finishTraining();
-                        } else {
-                            this.trainer.togglePauseTraining(); //resume
-                        }
+                    const endTraining = await dialogs.confirm({
+                        title: "Tem certeza que vai terminar o treino?",
+                        okButtonText: "Sim",
+                        cancelButtonText: "Não"
+                    });
+                    console.log("resultado da modal: " + endTraining);
+                    // result argument is boolean
+                    if (endTraining) {
+                        this.trainer.finishTraining();
+                    } else {
+                        this.trainer.togglePauseTraining(); //resume
+                    }
 
-                        break;
+                    break;
                 case Status.DONE:
                     return this.router.backToPreviousPage();
+
             }
         });
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.subscription.unsubscribe();
+        this.subscriptionSound.unsubscribe();
     }
 
     startTraining() {
