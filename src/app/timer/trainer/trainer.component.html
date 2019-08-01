@@ -12,8 +12,8 @@
       class="fa"
     ></Button>
 
-    <FlexboxLayout width="85%" flexDirection="row" justifyContent="center">
-      <Label [text]="headerTitle" class="h1 text-center "></Label>
+    <FlexboxLayout width="95%" flexDirection="row" justifyContent="center">
+      <Label text="Duração do Treino" class="h1 text-center "></Label>
     </FlexboxLayout>
   </FlexboxLayout>
 
@@ -32,7 +32,7 @@
       [isCountingTime]="false"
       [(counter)]="currentTraining.rounds"
     ></ns-timer-action>
-    
+
     <ns-timer-action [(counter)]="currentTraining.duration"></ns-timer-action>
 
     <ns-timer-action [(counter)]="currentTraining.interval"></ns-timer-action>

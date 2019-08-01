@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Page } from "tns-core-modules/ui/page/page";
-import { Training } from "~/app/models";
+import { Training, Status } from "~/app/models";
 import { TrainerService } from "~/app/services/trainer.service";
 import { RouterExtensions } from "nativescript-angular/router";
 
@@ -22,6 +22,11 @@ export class TrainingOnComponent implements OnInit {
     ngOnInit() {
         this.page.actionBarHidden = true;
         this.trainer.startTraining();
+        this.trainer.getStatus().subscribe(status => {
+            if(status === Status.DONE){
+                this.router.canGoBackToPreviousPage();
+            }
+        })
     }
 
     startTraining() {
