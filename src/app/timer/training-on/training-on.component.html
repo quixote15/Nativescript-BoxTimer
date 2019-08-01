@@ -22,18 +22,18 @@
 
   <FlexboxLayout class="player-buttons" row="2" col="0">
     <!-- pause -->
-    <Button (tap)="forceTrainingStop()" text="&#xf28d;" class="fa medium"></Button>
+    <Button (tap)="forceTrainingStop()" text="&#xf28d;" class="fa medium btn-icon"></Button>
     <Button
       *ngIf="!trainer.isPaused"
       (tap)="pauseTraining()"
       text="&#xf28c;"
-      class="fa medium"
+      class="fa medium btn-icon"
     ></Button>
     <Button
       *ngIf="trainer.isPaused"
       (tap)="pauseTraining()"
       text="&#xf01d;"
-      class="fa medium"
+      class="fa medium btn-icon"
     ></Button>
   </FlexboxLayout>
 </GridLayout>
