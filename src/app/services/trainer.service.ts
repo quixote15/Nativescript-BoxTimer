@@ -19,6 +19,15 @@ export class TrainerService {
         return this.status.asObservable();
     }
 
+    setStatus(status: Status) {
+        if(status === Status.WILL_FORCE_STOP){
+            if(!this.currentTraining.isPaused){
+                this.togglePauseTraining(); //pause training
+            }
+        }
+        this.status.next(status);
+    }
+
     setTrainingModel(training: Training) {
         this.currentTraining = training;
         this.currentInterval = training.duration;
@@ -32,7 +41,9 @@ export class TrainerService {
             isTraining
         } = this.currentTraining;
 
-        return isResting ? "Descanso" : `Round - ${currentRound}/${rounds}`;
+        return isResting
+            ? `Descanso - ${currentRound}/${rounds}`
+            : `Round - ${currentRound}/${rounds}`;
     }
 
     setIsTraining(isTraining: boolean) {
@@ -40,28 +51,25 @@ export class TrainerService {
     }
 
     startTraining() {
-        let {
-            duration,
-            interval,
-            currentRound,
-            isResting,
-            rounds
-        } = this.currentTraining;
+        let { duration, interval, rounds } = this.currentTraining;
         let currentTimeCounter = this.pausedValue || duration; //começar treino
         this.currentTraining.isTraining = true;
         this.status.next(Status.TRAINING);
         const setCurrentInterval = setInterval(() => {
-            if (currentTimeCounter === 0 && currentRound === rounds) {
+            if (
+                currentTimeCounter === 0 &&
+                this.currentTraining.currentRound === rounds
+            ) {
                 return this.finishTraining();
             }
 
             if (currentTimeCounter === 0) {
-                if (!isResting) {
+                if (!this.currentTraining.isResting) {
                     currentTimeCounter = interval; //now decrement the resting time
                     this.currentTraining.isResting = true;
                     this.status.next(Status.RESTING);
                 } else {
-                    currentRound++;
+                    this.currentTraining.currentRound++;
                     currentTimeCounter = duration;
                     this.currentTraining.isResting = false;
                     this.status.next(Status.TRAINING);
@@ -74,7 +82,7 @@ export class TrainerService {
             }
 
             this.pausedValue = currentTimeCounter;
-        }, 1000);
+        }, 100);
 
         this.clockIntervalId = setCurrentInterval;
     }
@@ -99,6 +107,6 @@ export class TrainerService {
         this.isPaused = false;
         this.pausedValue = null;
         this.status.next(Status.DONE);
-        this.setTrainingModel(new Training());
+        //this.setTrainingModel(new Training());
     }
 }

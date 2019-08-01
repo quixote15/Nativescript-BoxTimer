@@ -1,0 +1,8 @@
+<FlexboxLayout flexDirection="column" >
+  <Label text="Tem certeza que deseja finalizar o treino?"></Label>
+
+  <FlexboxLayout justifyContent="space-between" marginHorizontal="10">
+    <Button text="Não" (tap)="onHandleInput('no')"></Button>
+    <Button text="Sim" (tap)="onHandleInput('yes')"></Button>
+  </FlexboxLayout>
+</FlexboxLayout>

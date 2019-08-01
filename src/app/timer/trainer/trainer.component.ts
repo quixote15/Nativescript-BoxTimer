@@ -10,17 +10,20 @@ import { RouterExtensions } from "nativescript-angular/router";
     styleUrls: ["./trainer.component.scss"]
 })
 export class TrainerComponent implements OnInit {
-    currentTraining: Training = new Training();
+    currentTraining: Training ;
     isTraining: boolean = false;
 
     constructor(
         private page: Page,
         private trainer: TrainerService,
         private router: RouterExtensions
-    ) {}
+    ) {
+        console.log('chamour');
+    }
 
     ngOnInit() {
         this.page.actionBarHidden = true;
+        this.currentTraining  = new Training();
         this.trainer.setTrainingModel(this.currentTraining);
     }
 

@@ -2,13 +2,19 @@
 @import "~nativescript-theme-core/scss/index";
 @import "variables";
 
-label,
-button,
+Label,
+Button,
 .h1 {
   font-family: "Roboto", "Roboto-Regular";
   color: white;
 }
 
+Button {
+  background-color: transparent;
+  border-color: transparent;
+  z-index: 0;
+
+}
 .fa {
   font-family: "FontAwesome", "Font-Awesome";
 }

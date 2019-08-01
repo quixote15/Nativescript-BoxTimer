@@ -22,7 +22,7 @@
 
   <FlexboxLayout class="player-buttons" row="2" col="0">
     <!-- pause -->
-    <Button (tap)="finishTraining()" text="&#xf28d;" class="fa medium"></Button>
+    <Button (tap)="forceTrainingStop()" text="&#xf28d;" class="fa medium"></Button>
     <Button
       *ngIf="!trainer.isPaused"
       (tap)="pauseTraining()"
