@@ -60,10 +60,10 @@ Not all files are necessarily needed to be encapsulated in such a granularity, b
 
 
 #### Screenshots
-<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/blob/master/examples/screenshot_1.png' style="margin-right: 10px;"></img>
-<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/blob/master/examples/screenshot_2.png' style="margin-right: 10px;"></img>
-<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/blob/master/examples/screenshot_3.png' style="margin-right: 10px;"></img>
-<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/blob/master/examples/screenshot_4.png'></img>
+<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/tree/master/examples/screenshot_1.png' style="margin-right: 10px;"></img>
+<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/tree/master/examples/screenshot_2.png' style="margin-right: 10px;"></img>
+<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/tree/master/examples/screenshot_3.png' style="margin-right: 10px;"></img>
+<img width="200px" src='https://github.com/quixote15/Nativescript-BoxTimer/tree/master/examples/screenshot_4.png'></img>
 
 
 
