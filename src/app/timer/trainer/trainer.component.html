@@ -29,13 +29,14 @@
     </FlexboxLayout>
 
     <ns-timer-action
+      name="Rounds"
       [isCountingTime]="false"
       [(counter)]="currentTraining.rounds"
     ></ns-timer-action>
 
-    <ns-timer-action [(counter)]="currentTraining.duration"></ns-timer-action>
+    <ns-timer-action name="Duração do treino" [(counter)]="currentTraining.duration"></ns-timer-action>
 
-    <ns-timer-action [(counter)]="currentTraining.interval"></ns-timer-action>
+    <ns-timer-action name="Intervalo" [(counter)]="currentTraining.interval"></ns-timer-action>
 
     <!-- <FlexboxLayout >
 

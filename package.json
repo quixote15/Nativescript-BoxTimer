@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.boxTimer",
+    "id": "com.tiagosantosdev15.boxTimer",
     "tns-android": {
       "version": "6.0.0"
     },

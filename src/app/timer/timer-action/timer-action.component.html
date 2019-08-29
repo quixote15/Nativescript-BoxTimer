@@ -1,32 +1,36 @@
-<FlexboxLayout class="timer-action">
-  <Button
-    *ngIf="hasActionButtons"
-    (tap)="onSubtract()"
-    fontSize="30"
-    text="&#xf0d9;"
-    class="fa btn-icon text-white"
-  ></Button>
-  <Label
-    *ngIf="isCountingTime"
-    marginLeft="10"
-    marginRight="10"
-    fontSize="60"
-    class="text-white"
-    [text]="counter | toMinute"
-  ></Label>
-  <Label
-    *ngIf="!isCountingTime"
-    marginLeft="10"
-    marginRight="10"
-    fontSize="60"
-    class="text-white"
-    [text]="counter"
-  ></Label>
-  <Button
-    *ngIf="hasActionButtons"
-    (tap)="onAdd()"
-    fontSize="30"
-    text="&#xf0da;"
-    class="fa btn-icon text-white"
-  ></Button>
+<FlexboxLayout flexDirection="column" justifyContent="center" alignItems="center" marginBottom="20">
+
+  <FlexboxLayout class="timer-action">
+    <Button
+      *ngIf="hasActionButtons"
+      (tap)="onSubtract()"
+      fontSize="30"
+      text="&#xf0d9;"
+      class="fa btn-icon text-white animated-timer "
+    ></Button>
+    <Label
+      *ngIf="isCountingTime"
+      marginLeft="10"
+      marginRight="10"
+      fontSize="60"
+      class="text-white"
+      [text]="counter | toMinute"
+    ></Label>
+    <Label
+      *ngIf="!isCountingTime"
+      marginLeft="10"
+      marginRight="10"
+      fontSize="60"
+      class="text-white"
+      [text]="counter"
+    ></Label>
+    <Button
+      *ngIf="hasActionButtons"
+      (tap)="onAdd()"
+      fontSize="30"
+      text="&#xf0da;"
+      class="fa btn-icon text-white"
+    ></Button>
+  </FlexboxLayout>
+  <Label [text]="name" class="action-label"></Label>
 </FlexboxLayout>
