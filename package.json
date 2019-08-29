@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.boxTimer",
+    "id": "com.tiagosantosdev15.boxTimer",
     "tns-android": {
       "version": "6.0.0"
     },
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
     "nativescript-angular": "~8.0.0",
+    "nativescript-audio-player": "^1.0.3",
     "nativescript-theme-core": "~1.0.6",
     "reflect-metadata": "~0.1.12",
     "rxjs": "~6.5.0",

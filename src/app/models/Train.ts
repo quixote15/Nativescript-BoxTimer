@@ -3,7 +3,7 @@ export class Training {
     description:String = 'Treino padrão de boxe.';
     rounds: number = 3;
     interval: number = 60;
-    duration: number = 180;
+    duration: number = 20;
     completedRounds: number = 0;
     isTraining: boolean = false;
     currentRound: number = 1;
