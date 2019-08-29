@@ -80,10 +80,10 @@ export class TrainingOnComponent implements OnInit, OnDestroy {
                     }
                     /*
                         //Não fazer nada se o usuário clicar em NÃO ?
-                        
+
                     else {
                         this.trainer.resumeTraining(); //resume
-                    }*
+                    }*/
 
                     break;
                 case Status.DONE:
