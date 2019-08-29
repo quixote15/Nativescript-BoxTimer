@@ -23,6 +23,8 @@ export class TimerActionComponent implements OnInit {
     }
 
     onSubtract() {
+        if(this.isCountingTime && this.counter == 20) return;
+
         const increment: number = this.isCountingTime ? 10 : 1;
         this.counter = this.counter - increment;
         this.counter = this.counter >= 0 ? this.counter : 0;
