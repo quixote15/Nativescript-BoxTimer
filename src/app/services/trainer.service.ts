@@ -27,7 +27,7 @@ export class TrainerService {
     setStatus(status: Status) {
         if (status === Status.WILL_FORCE_STOP) {
             if (!this.currentTraining.isPaused) {
-                this.togglePauseTraining(); //pause training
+                this.pauseTraining(); //pause training
             }
         }
         this.status.next(status);
@@ -99,14 +99,16 @@ export class TrainerService {
         this.clockIntervalId = setCurrentInterval;
     }
 
-    togglePauseTraining() {
-        this.isPaused = !this.isPaused;
-        if (this.isPaused) {
-            clearInterval(this.clockIntervalId);
-            this.status.next(Status.PAUSED);
-        } else {
-            this.startTraining();
-        }
+    pauseTraining() {
+        this.isPaused = this.currentTraining.isPaused = true;
+        clearInterval(this.clockIntervalId);
+        this.status.next(Status.PAUSED);
+    }
+
+    resumeTraining() {
+        this.isPaused = this.currentTraining.isPaused = false;
+        this.startTraining();
+
     }
 
     getCurrentInterval() {

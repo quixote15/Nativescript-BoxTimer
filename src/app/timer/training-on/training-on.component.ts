@@ -77,9 +77,13 @@ export class TrainingOnComponent implements OnInit, OnDestroy {
                     // result argument is boolean
                     if (endTraining) {
                         this.trainer.finishTraining();
-                    } else {
-                        this.trainer.togglePauseTraining(); //resume
                     }
+                    /*
+                        //Não fazer nada se o usuário clicar em NÃO ?
+                        
+                    else {
+                        this.trainer.resumeTraining(); //resume
+                    }*
 
                     break;
                 case Status.DONE:
@@ -108,7 +112,11 @@ export class TrainingOnComponent implements OnInit, OnDestroy {
     }
 
     pauseTraining() {
-        this.trainer.togglePauseTraining();
+        this.trainer.pauseTraining();
+    }
+
+    resumeTraining() {
+        this.trainer.resumeTraining();
     }
 
     onBack() {
